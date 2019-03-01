@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jjblues86/401N12-Lab-07-Middleware#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "moment": "^2.24.0"
   }
 }
