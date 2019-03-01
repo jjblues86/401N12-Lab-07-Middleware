@@ -1,0 +1,22 @@
+{
+  "name": "401n12-lab-07-middleware",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjblues86/401N12-Lab-07-Middleware.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjblues86/401N12-Lab-07-Middleware/issues"
+  },
+  "homepage": "https://github.com/jjblues86/401N12-Lab-07-Middleware#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
