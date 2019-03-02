@@ -4,9 +4,10 @@
  * @type {createApplication|createApplication}
  */
 const express = require('express');
-const errorMiddleware = require('./error');
 const PORT = process.env.PORT || 8080;
 const app = express();
+const router = require('./routes.js');
+const moment = require('moment');
 
 
 
@@ -14,7 +15,6 @@ const app = express();
 // Jerome - Having an empty app.use will always result to a Global middleware
 
 // Jerome - Write middleware that runs on every route that adds a property called requestTime with a value of the current Date/Time to the request object.
-
 
 app.use((req, res, next) => {
     req.requestTime = Date();
@@ -28,6 +28,8 @@ app.use((req,res,next) => {
     console.log(`Request Type: ${req.method}`);
     console.log(`Request Type: ${req.requestTime}`);
     console.log(`Request Type: ${req.path}`);
+    console.log(`Request Type: ${moment().format()}`);
+
     next();
 
 });
@@ -53,41 +55,21 @@ app.get('/b', squareNum(12), (req,res) => {
     res.status(200).send(`Route B - num: ${req.num}`);
 });
 
-// Jerome - Write middleware that runs only on the /c route that performs an additional console.log() with a randomly generated number
 
-const randomNum = ('/c', (req,res,next,min,max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    req.randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-    console.log(`${req.randomNum}`);
-    next();
-});
-
-app.use(randomNum);
-
-app.get('/c', (req,res) => {
-
-    res.status(200).send('Route C');
-});
-
-
-// Jerome - Write middleware that runs on the /d route that raises an error using next
-
-app.get('/d', (error,req,res,next) => {
-    res.status(200).send('Route D');
-
-});
+app.use('/', router);
 
 
 // Jerome - Write error handling middleware
 app.use((error, req, res, next) => {
-    console.log('This is an error handler');
+    console.error('This is an error handler');
     res.status(500).send('ERROR');
+    next();
 });
 
 
+
 // Jerome - Write not found middleware and a catch-all route that uses it.
-app.use('/',(req,res) => {
+app.use('/*',(req,res) => {
     console.log('Unknown Route');
     res.status(404).send('Page is not found');
     res.end();
