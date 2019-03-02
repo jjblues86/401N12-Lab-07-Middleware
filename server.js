@@ -7,7 +7,7 @@ const express = require('express');
 const PORT = process.env.PORT || 8080;
 const app = express();
 const router = require('./routes.js');
-const moment = require('moment');
+
 
 
 
@@ -17,7 +17,7 @@ const moment = require('moment');
 // Jerome - Write middleware that runs on every route that adds a property called requestTime with a value of the current Date/Time to the request object.
 
 app.use((req, res, next) => {
-    req.requestTime = Date();
+    req.requestTime = new Date();
 
     next();
 });
@@ -28,7 +28,7 @@ app.use((req,res,next) => {
     console.log(`Request Type: ${req.method}`);
     console.log(`Request Type: ${req.requestTime}`);
     console.log(`Request Type: ${req.path}`);
-    console.log(`Request Type: ${moment().format()}`);
+    // console.log(`Request Type: ${moment().format()}`);
 
     next();
 
@@ -63,15 +63,15 @@ app.use('/', router);
 app.use((error, req, res, next) => {
     console.error('This is an error handler');
     res.status(500).send('ERROR');
-    next();
 });
 
 
 
 // Jerome - Write not found middleware and a catch-all route that uses it.
-app.use('/*',(req,res) => {
+app.get('/*',(req,res) => {
     console.log('Unknown Route');
-    res.status(404).send('Page is not found');
+    res.status(404);
+    res.send('Page is not found');
     res.end();
 });
 
