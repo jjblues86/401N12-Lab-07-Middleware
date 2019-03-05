@@ -4,6 +4,7 @@
 # AUTHOR - Jerome Joof
 # LINKS AND RESOURCES
 * [Repo](https://github.com/jjblues86/401N12-Lab-07-Middleware)
+* [Heroku](https://lab-7-middleware.herokuapp.com/)
 # DESCRIPTION
 * Write a middleware and router functions
 
